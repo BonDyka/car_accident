@@ -24,5 +24,7 @@ hs_err_pid*
 
 out
 target
+classes
+
 .idea
-car_accident.iml
+car-accident.iml

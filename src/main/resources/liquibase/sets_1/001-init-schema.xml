@@ -1,0 +1,32 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="001-create_table_accidents" author="abondarev">
+        <createTable tableName="accidents">
+            <column name="id" autoIncrement="true" type="INTEGER">
+                <constraints nullable="false" unique="true" primaryKey="true" />
+            </column>
+            <column name="name" type="VARCHAR(20)">
+                <constraints nullable="false" />
+            </column>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="address" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+    
+    <changeSet id="002-fill_table_accidents" author="abondarev">
+        <insert tableName="accidents">
+            <column name="name">Accident</column>
+            <column name="description">Car Accident on street</column>
+            <column name="address">City, street</column>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
