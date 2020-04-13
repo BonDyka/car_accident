@@ -1,24 +1,30 @@
 package ru.job4j.police.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import ru.job4j.police.model.Accident;
 import ru.job4j.police.service.AccidentService;
 
 @Controller
 public class IndexController {
     private AccidentService accidentService;
 
-    @Autowired
     public IndexController(AccidentService accidentService) {
         this.accidentService = accidentService;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping
     public String showList(ModelMap model) {
         model.addAttribute("listAccident", this.accidentService.findAll());
         return "index";
+    }
+
+    @PostMapping("/accident")
+    public String addOne(@ModelAttribute Accident accident) {
+        this.accidentService.save(accident);
+        return "redirect:/";
     }
 }
