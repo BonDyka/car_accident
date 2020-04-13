@@ -54,16 +54,20 @@
                 <input type="hidden" name="id">
                 <div class="form-group">
                     <label for="name">Name</label>
-                    <input type="text" class="form-control" id="name" placeholder="Enter accident name">
+                    <input type="text" name="name" class="form-control" id="name" placeholder="Enter accident name">
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control" id="description" rows="3" placeholder="Describe the accident"></textarea>
+                    <textarea class="form-control" name="text" id="description" rows="3" placeholder="Describe the accident"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="address">Address</label>
-                    <input type="text" class="form-control" id="address" placeholder="Enter address">
+                    <input type="text" class="form-control" name="address" id="address" placeholder="Enter address">
                 </div>
+                <div class="form-group">
+                    <input type="submit" class="form-control" value="add">
+                </div>
+
             </form>
         </div>
         <div class="content m-5 p-3 border rounded">
