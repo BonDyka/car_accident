@@ -4,8 +4,6 @@ import org.springframework.stereotype.Service;
 import ru.job4j.police.model.Accident;
 import ru.job4j.police.repository.AccidentRepo;
 
-import java.util.List;
-
 @Service
 public class AccidentServiceImpl implements AccidentService {
     private final AccidentRepo accidentRepo;
@@ -20,22 +18,7 @@ public class AccidentServiceImpl implements AccidentService {
     }
 
     @Override
-    public void update(Accident entity) {
-        this.accidentRepo.update(entity);
-    }
-
-    @Override
-    public void delete(Accident entity) {
-        this.accidentRepo.delete(entity);
-    }
-
-    @Override
-    public Accident findById(Integer id) {
-        return this.accidentRepo.findById(id);
-    }
-
-    @Override
-    public List<Accident> findAll() {
+    public Iterable<Accident> findAll() {
         return this.accidentRepo.findAll();
     }
 }
