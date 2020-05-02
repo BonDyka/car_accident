@@ -27,4 +27,4 @@ target
 classes
 
 .idea
-car-accident.iml
+*.iml

@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                            http://www.springframework.org/schema/context
-                           https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/data/jpa https://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+                           https://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/data/jpa
+                           https://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+                           http://www.springframework.org/schema/security
+                           https://www.springframework.org/schema/security/spring-security.xsd">
 
     <context:property-placeholder location="classpath:hibernate.properties"/>
     <context:component-scan base-package="ru.job4j.police"/>
@@ -44,4 +50,21 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
+
+    <!-- Security config -->
+    <security:http>
+        <security:intercept-url pattern="/**" access="isAuthenticated()" />
+        <security:form-login />
+        <security:logout />
+    </security:http>
+    <security:authentication-manager>
+        <security:authentication-provider>
+            <security:password-encoder ref="passwordEncoder" />
+            <security:jdbc-user-service
+                    data-source-ref="dataSource"
+                    authorities-by-username-query="select username, authority from authorities where username = ?" />
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+    <bean id="passwordEncoder" class="org.springframework.security.crypto.password.NoOpPasswordEncoder" />
 </beans>
