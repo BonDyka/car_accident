@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -50,7 +51,7 @@
     <div class="container">
         <div class="content m-5 p-3 border rounded bg-light">
             <h3>Accident form</h3>
-            <form method="post" action="${pageContext.servletContext.contextPath}/accident">
+            <form:form method="post" action="${pageContext.servletContext.contextPath}/accident">
                 <input type="hidden" name="id">
                 <div class="form-group">
                     <label for="name">Name</label>
@@ -68,7 +69,7 @@
                     <input type="submit" class="form-control" value="add">
                 </div>
 
-            </form>
+            </form:form>
         </div>
         <div class="content m-5 p-3 border rounded">
             <h3>List Accidents</h3>

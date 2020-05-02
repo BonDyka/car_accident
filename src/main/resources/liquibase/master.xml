@@ -5,5 +5,6 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <include file="src/main/resources/liquibase/sets_1/001-init-schema.xml" />
+    <include file="src/main/resources/liquibase/sets_1/002-add-security-tables.xml" />
 
 </databaseChangeLog>
