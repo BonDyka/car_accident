@@ -53,8 +53,10 @@
 
     <!-- Security config -->
     <security:http>
+        <security:intercept-url pattern="/login" access="permitAll()" />
+        <security:intercept-url pattern="/logout" access="permitAll()" />
         <security:intercept-url pattern="/**" access="isAuthenticated()" />
-        <security:form-login />
+        <security:form-login login-page="/login" default-target-url="/" />
         <security:logout />
     </security:http>
     <security:authentication-manager>

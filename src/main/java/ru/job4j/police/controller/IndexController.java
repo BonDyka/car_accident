@@ -27,4 +27,9 @@ public class IndexController {
         this.accidentService.save(accident);
         return "redirect:/";
     }
+
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 }
