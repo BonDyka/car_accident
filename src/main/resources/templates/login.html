@@ -8,7 +8,14 @@
 <div id="main">
     <div class="container">
         <h1>Login page</h1>
-        <span th:if="true"></span>
+        <div class="form">
+            <form method="post" th:action="@{/login}">
+                <input type="text" name="username" placeholder="Enter username..." />
+                <input type="password" name="password" placeholder="Enter password..." />
+                <input type="submit" value="SignIn" />
+            </form>
+            <a href="/registration">Registration</a>
+        </div>
     </div>
 </div>
 </body>
