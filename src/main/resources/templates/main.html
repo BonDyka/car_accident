@@ -6,7 +6,41 @@
 </head>
 <body>
 <div id="main">
-    <span th:text="${msg}"></span>
+    <div class="form">
+        <form method="post">
+            <input type="text" name="name" />
+            <input type="text" name="text" />
+            <input type="text" name="address" />
+            <input type="submit" value="Add" />
+        </form>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Address</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr th:each="accident : ${accidents}">
+            <td>
+                <i th:text="${accident.id}"></i>
+            </td>
+            <td>
+                <b th:text="${accident.name}"></b>
+            </td>
+            <td>
+                <span th:text="${accident.text}"></span>
+            </td>
+            <td>
+                <span th:text="${accident.address}"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
