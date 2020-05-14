@@ -1,27 +1,46 @@
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
-        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
-    <changeSet id="create-security-tables" author="abondarev">
-        <sql>
-            create table users(
-            username varchar(50) not null primary key,
-            password varchar(50) not null,
-            enabled boolean not null
-            );
-
-            create table authorities (
-            username varchar(50) not null,
-            authority varchar(50) not null,
-            constraint fk_authorities_users foreign key(username) references users(username)
-            );
-            create unique index ix_auth_username on authorities (username,authority);
-        </sql>
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+    <changeSet id="003-create_security_tables" author="abondarev">
+        <createTable tableName="usr">
+            <column name="id" autoIncrement="true" type="INTEGER">
+                <constraints nullable="false" unique="true" primaryKey="true" primaryKeyName="usr_pkey" />
+            </column>
+            <column name="username" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="password" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="active" type="BOOLEAN">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <createTable tableName="user_role">
+            <column name="roles" type="VARCHAR(20)">
+                <constraints nullable="false" />
+            </column>
+            <column name="user_id" type="INTEGER">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="user_role"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk_roles_user_id"
+                                 referencedTableName="usr"
+                                 referencedColumnNames="id" />
     </changeSet>
-    <changeSet id="fill-security-table" author="abondarev">
-        <sql>
-            INSERT INTO users(username, password, enabled) VALUES ('user', '1234', true);
-            INSERT INTO authorities(username, authority) VALUES ('user', 'ROLE_USER');
-        </sql>
+    <changeSet id="004-fill_security_tables" author="abondarev">
+        <insert tableName="usr">
+            <column name="username">admin</column>
+            <column name="password">$2a$08$VaID6ts7UrQwUrufJFnio.Czvzu9hbBPKTNpNvC0RaoDLHaOqGQXG</column>
+            <column name="active">true</column>
+        </insert>
+        <insert tableName="user_role">
+            <column name="roles">USER</column>
+            <column name="user_id">1</column>
+        </insert>
     </changeSet>
 </databaseChangeLog>
