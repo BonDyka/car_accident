@@ -28,6 +28,6 @@ public class MainController {
     @PostMapping
     public String add(@RequestParam String name, @RequestParam String text, @RequestParam String address) {
         accidentRepo.save(new Accident(name, text, address));
-        return "redirect:/main";
+        return "redirect:/";
     }
 }
