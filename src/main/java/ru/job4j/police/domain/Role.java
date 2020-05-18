@@ -1,5 +1,13 @@
 package ru.job4j.police.domain;
 
-public enum  Role {
-    USER
+import org.springframework.security.core.GrantedAuthority;
+
+public enum  Role implements GrantedAuthority {
+    ADMIN,
+    USER;
+
+    @Override
+    public String getAuthority() {
+        return name();
+    }
 }
