@@ -4,15 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import ru.job4j.police.domain.Accident;
 import ru.job4j.police.service.AccidentService;
 
 @Controller
 public class MainController {
 
-    private AccidentService accidentService;
+    private final AccidentService accidentService;
 
     @Autowired
     public MainController(AccidentService accidentService) {
@@ -26,8 +26,8 @@ public class MainController {
     }
 
     @PostMapping
-    public String add(@RequestParam String name, @RequestParam String text, @RequestParam String address) {
-        accidentService.save(new Accident(name, text, address));
+    public String add(@ModelAttribute Accident accident) {
+        accidentService.save(accident);
         return "redirect:/";
     }
 }
